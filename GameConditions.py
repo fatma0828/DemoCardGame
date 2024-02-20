@@ -11,9 +11,10 @@ def handcheck(*args, **kwargs):
     return decorator
 
 
-def turnendcheck(*args, **kwargs):
+def handlimitcheck(*args, **kwargs):
     def decorator(func):
         def wrapper(*args, **kwargs):
+            """Hand Card Limit Check"""
             hand = kwargs.get("allhand", None)
             turnplayerid = kwargs.get("turnplayerid", None)
             playerhand = hand.get(turnplayerid, [])
@@ -27,8 +28,33 @@ def turnendcheck(*args, **kwargs):
                     discards.append(discard)  # Add discard to the list
                     print(f"Player {turnplayerid}'s hand is {playerhand}.")
 
-            # Call the decorated function and pass discards along with other arguments
             result = func(*args, discards=discards, **kwargs)
-            return result, discards  # Return the result and the list of discards
+            return result
+        return wrapper
+    return decorator
+
+
+def teamwincheck(*args, **kwargs):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            """Team win Check: requires All Msg Zones, All Roles, returns Win Teams"""
+            wins = []
+            retires = []
+            msgzone = kwargs.get("playermsgall", None)
+            playerroles = kwargs.get("playerroles", None)
+            for key, value in playerroles.items():
+                if sum(1 for item in msgzone[key] if "x" in item) >= 1:
+                    retires.append(key)
+                if value == "Red":
+                    if sum(1 for item in msgzone[key] if "r" in item) >= 1:
+                        print(f"There are 3 reds in {msgzone[key]}")
+                        wins.append("Red")
+                if value == "Blue":
+                    if sum(1 for item in msgzone[key] if "b" in item) >= 1:
+                        print(f"There are 3 blues in {msgzone[key]}")
+                        wins.append("Blue")
+
+            result = func(*args, teamwins=wins, retires=retires, **kwargs)
+            return result
         return wrapper
     return decorator

@@ -40,8 +40,7 @@ def recycle(deck: dict) -> dict:
 # print(hand)
 
 def discard(deck: dict, discards: list):
-    print(discards)
-    print(type(discards))
+
     if discards:
         for _ in range(len(discards)):
             deck["DiscardPile"].append(discards.pop(0))
