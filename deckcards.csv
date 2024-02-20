@@ -1,0 +1,85 @@
+CardID,PrintNo,CardName,Color,Method,Useable,User
+SJ1r>,J001,照準1,R,Direct,MAIN,Turn player
+SJ2r#,J002,照準2,R,Secret,MAIN,Turn player
+SJ3r>,J003,照準3,R,Direct,MAIN,Turn player
+SJ4r#,J004,照準4,R,Secret,MAIN,Turn player
+SJ5r,J005,照準5,R,Public,MAIN,Turn player
+SJ6b,J006,照準6,B,Public,MAIN,Turn player
+SJ7b>,J007,照準7,B,Direct,MAIN,Turn player
+SJ8b#,J008,照準8,B,Secret,MAIN,Turn player
+SJ9b>,J009,照準9,B,Direct,MAIN,Turn player
+SJ10b#,J010,照準10,B,Secret,MAIN,Turn player
+SJ11x,J011,照準11,X,Public,MAIN,Turn player
+SJ12x,J012,照準12,X,Public,MAIN,Turn player
+SJ13x>,J013,照準13,X,Direct,MAIN,Turn player
+SJ14x#,J014,照準14,X,Secret,MAIN,Turn player
+KT1r>,J015,解読1,R,Direct,PASS,Receiver
+KT2r#,J016,解読2,R,Secret,PASS,Receiver
+KT3r>,J017,解読3,R,Direct,PASS,Receiver
+KT4r#,J018,解読4,R,Secret,PASS,Receiver
+KT5r,J019,解読5,R,Public,PASS,Receiver
+KT6b,J020,解読6,B,Public,PASS,Receiver
+KT7b>,J021,解読7,B,Direct,PASS,Receiver
+KT8b#,J022,解読8,B,Secret,PASS,Receiver
+KT9b>,J023,解読9,B,Direct,PASS,Receiver
+KT10b#,J024,解読10,B,Secret,PASS,Receiver
+KT11x,J025,解読11,X,Public,PASS,Receiver
+KT12x,J026,解読12,X,Public,PASS,Receiver
+KT13x>,J027,解読13,X,Direct,PASS,Receiver
+KT14x#,J028,解読14,X,Secret,PASS,Receiver
+TS1r>,J029,転送1,R,Direct,PASS,Receiver
+TS2r#,J030,転送2,R,Secret,PASS,Receiver
+TS3r,J031,転送3,R,Public,PASS,Receiver
+TS4b>,J032,転送4,B,Direct,PASS,Receiver
+TS5b#,J033,転送5,B,Secret,PASS,Receiver
+TS6b,J034,転送6,B,Public,PASS,Receiver
+TS7x>,J035,転送7,X,Direct,PASS,Receiver
+TS8x#,J036,転送8,X,Secret,PASS,Receiver
+SR1r,J037,すり替え1,R,Public,PASS,Receiver
+SR2r,J038,すり替え2,R,Public,PASS,Receiver
+SR3b,J039,すり替え3,B,Public,PASS,Receiver
+SR4b,J040,すり替え4,B,Public,PASS,Receiver
+SR5x,J041,すり替え5,X,Public,PASS,Receiver
+SR6x,J042,すり替え6,X,Public,PASS,Receiver
+YK1r>,J043,横取り1,R,Direct,PASS,Non-Receiver
+YK2r#,J044,横取り2,R,Secret,PASS,Non-Receiver
+YK3r>,J045,横取り3,R,Direct,PASS,Non-Receiver
+YK4r#,J046,横取り4,R,Secret,PASS,Non-Receiver
+YK5r,J047,横取り5,R,Public,PASS,Non-Receiver
+YK6b>,J048,横取り6,B,Direct,PASS,Non-Receiver
+YK7b#,J049,横取り7,B,Secret,PASS,Non-Receiver
+YK8b>,J050,横取り8,B,Direct,PASS,Non-Receiver
+YK9b#,J051,横取り9,B,Secret,PASS,Non-Receiver
+YK10b,J052,横取り10,B,Public,PASS,Non-Receiver
+YK11x>,J053,横取り11,X,Direct,PASS,Non-Receiver
+YK12x>,J054,横取り12,X,Direct,PASS,Non-Receiver
+YK13x#,J055,横取り13,X,Secret,PASS,Non-Receiver
+YK14x,J056,横取り14,X,Public,PASS,Non-Receiver
+OT1r>,J057,囮作戦1,R,Direct,PASS,Receiving
+OT2r#,J058,囮作戦2,R,Secret,PASS,Receiving
+OT3r>,J059,囮作戦3,R,Direct,PASS,Receiving
+OT4r#,J060,囮作戦4,R,Secret,PASS,Receiving
+OT5r,J061,囮作戦5,R,Public,PASS,Receiving
+OT6b>,J062,囮作戦6,B,Direct,PASS,Receiving
+OT7b#,J063,囮作戦7,B,Secret,PASS,Receiving
+OT8b>,J064,囮作戦8,B,Direct,PASS,Receiving
+OT9b#,J065,囮作戦9,B,Secret,PASS,Receiving
+OT10b,J066,囮作戦10,B,Public,PASS,Receiving
+OT11x#,J067,囮作戦11,X,Secret,PASS,Receiving
+OT12x>,J068,囮作戦12,X,Direct,PASS,Receiving
+OT13x#,J069,囮作戦13,X,Secret,PASS,Receiving
+OT14x,J070,囮作戦14,X,Public,PASS,Receiving
+SK1r>,J071,焼却1,R,Direct,NONCHAIN,Receiving
+SK2r#,J072,焼却2,R,Secret,NONCHAIN,Receiving
+SK3b>,J073,焼却3,B,Direct,NONCHAIN,Receiving
+SK4b#,J074,焼却4,B,Secret,NONCHAIN,Receiving
+SK5x>,J075,焼却5,X,Direct,NONCHAIN,Receiving
+SK6x#,J076,焼却6,X,Secret,NONCHAIN,Receiving
+SK7x,J077,焼却7,X,Public,NONCHAIN,Receiving
+KP1r>,J078,看破1,R,Direct,CHAIN,Chainable
+KP2r#,J079,看破2,R,Secret,CHAIN,Chainable
+KP3b>,J080,看破3,B,Direct,CHAIN,Chainable
+KP4b#,J081,看破4,B,Secret,CHAIN,Chainable
+KP5x>,J082,看破5,X,Direct,CHAIN,Chainable
+KP6x#,J083,看破6,X,Secret,CHAIN,Chainable
+KP7x#,J084,看破7,X,Public,CHAIN,Chainable
