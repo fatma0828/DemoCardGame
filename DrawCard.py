@@ -1,4 +1,5 @@
 import random
+from icecream import ic
 
 
 def drawone(deck: dict, playerhand: list) -> list:
@@ -46,3 +47,12 @@ def discard(deck: dict, discards: list):
             deck["DiscardPile"].append(discards.pop(0))
 
     return deck, discards
+
+
+def useeffectcard(hand: list, card: str, deck: dict):
+
+    if card:
+        hand.remove(card)
+        discard(deck, [card])
+
+    return hand

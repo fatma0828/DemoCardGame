@@ -24,6 +24,8 @@ PlayerChars = StartDistribution.chardraw(PlayerNum)
 PlayerHandAll = {}
 PlayerMsgAll = {}
 PlayerNames = {}
+PlayerBuffs = {}
+
 for playerid in range(PlayerNum):
     while True:
         UserName: str = input("Player name?")
@@ -34,6 +36,7 @@ for playerid in range(PlayerNum):
     DrawCard.draw(DeckFull, PlayerHandAll[playerid], 4)
 
     PlayerMsgAll[playerid] = []
+    PlayerBuffs[playerid] = []
 
     Database.createuser(GameDatabase, UserName, PlayerChars[playerid], PlayerRoles[playerid])
 
@@ -63,17 +66,19 @@ while not winners:
         PlayerTurn.startturn(DeckFull, TurnPlayerID, PlayerHandAll)
 
         """Main Phase"""
-        PlayerTurn.mainphase(turnplayerid=TurnPlayerID, allhand=PlayerHandAll)
+        survivor = PlayersDF[PlayersDF['Status'] == 'Alive'].index.tolist()
+        PlayerTurn.mainphase(turnplayerid=TurnPlayerID, playernames=PlayerNames,
+                             allhand=PlayerHandAll, allbuffs=PlayerBuffs, deck=DeckFull, survivor=survivor)
 
         """Message Phase"""
         survivor = PlayersDF[PlayersDF['Status'] == 'Alive'].index.tolist()
         PlayerTurn.messagephase(turnplayerid=TurnPlayerID, playerno=PlayerNum,
                                 allhand=PlayerHandAll, allmsg=PlayerMsgAll,
-                                survivor=survivor)
+                                survivor=survivor, playernames=PlayerNames, allbuffs=PlayerBuffs)
 
         """End Phase"""
         checkresults = PlayerTurn.endphase(turnplayerid=TurnPlayerID, deck=DeckFull, allhand=PlayerHandAll,
-                                           playermsgall=PlayerMsgAll, playerroles=PlayerRoles)
+                                           playermsgall=PlayerMsgAll, playerroles=PlayerRoles, allbuffs=PlayerBuffs)
 
         teamwins = checkresults["teamwins"]
         retires = checkresults["retires"]
