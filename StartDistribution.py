@@ -1,8 +1,8 @@
 import random
 import pandas as pd
 
-deckcsv = pd.read_csv("deckcards.csv")
-maindeck = deckcsv["CardID"].tolist()
+import Database
+import cardtable
 
 
 def startrole(playernum: int) -> dict:
@@ -45,9 +45,12 @@ def chardraw(playernum: int) -> dict:
 
 def deckstart() -> dict:
 
-    random.shuffle(maindeck)
+    random.shuffle(cardtable.maindeck)
     discardpile = []
-    fulldeck = {"MainDeck": maindeck, "DiscardPile": discardpile}
+    fulldeck = {"MainDeck": cardtable.maindeck, "DiscardPile": discardpile}
+
+    for cardid in range(len(cardtable.deckcsv)):
+        Database.createdeck(cardtable.deckcsv["CardID"][cardid], cardtable.deckcsv["CardName"][cardid])
 
     return fulldeck
 

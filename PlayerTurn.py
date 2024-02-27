@@ -7,7 +7,7 @@ import cardtable
 def startturn(deck: dict, turnplayerid: int, allhand: dict):
 
     turnhand = allhand[turnplayerid]
-    DrawCard.draw(deck, turnhand, 2)
+    DrawCard.draw(deck=deck, playerhand=turnhand, drawnum=2, playerid=turnplayerid)
 
     return deck
 
@@ -24,7 +24,7 @@ def mainphase(turnplayerid: int, playernames: dict, allhand: dict, allbuffs: dic
                 print(f"Attempting to use {usecard}.")
                 if usecard.startswith("SJ"):
                     otherplayers = survivor
-                    otherplayers.remove(turnplayerid)
+                    otherplayers.remove(turnplayerid) if turnplayerid in otherplayers else None
                     while True:
                         try:
                             sjtarget = input(f"Please select target player ID: {otherplayers} or stop by 'skip'.")
@@ -65,7 +65,7 @@ def messagephase(turnplayerid: int, playerno: int, allhand: dict, allmsg: dict,
     else:
         msgtarget = (turnplayerid - 1) % playerno
 
-    allhand[turnplayerid].remove(sendmsg)
+    allhand[turnplayerid].remove(sendmsg) if sendmsg in allhand[turnplayerid] else None
     ic(survivor)
     rotatingmsg(turnplayerid, playerno, msgtarget, sendmsg, allhand, allmsg, survivor, playernames, allbuffs)
 

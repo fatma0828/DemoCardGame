@@ -1,85 +1,85 @@
-CardID,PrintNo,CardName,Color,Method,Useable,User
-SJ1r>,J001,照準（赤・直達）,R,Direct,MAIN,Turn player
-SJ2r#,J002,照準（赤・機密）,R,Secret,MAIN,Turn player
-SJ3r>,J003,照準（赤・直達）,R,Direct,MAIN,Turn player
-SJ4r#,J004,照準（赤・機密）,R,Secret,MAIN,Turn player
-SJ5r,J005,照準（赤・公開）,R,Public,MAIN,Turn player
-SJ6b,J006,照準（青・直達）,B,Public,MAIN,Turn player
-SJ7b>,J007,照準（青・機密）,B,Direct,MAIN,Turn player
-SJ8b#,J008,照準（青・直達）,B,Secret,MAIN,Turn player
-SJ9b>,J009,照準（青・機密）,B,Direct,MAIN,Turn player
-SJ10b#,J010,照準（青・公開）,B,Secret,MAIN,Turn player
-SJ11x,J011,照準（黒・公開）,X,Public,MAIN,Turn player
-SJ12x,J012,照準（黒・公開）,X,Public,MAIN,Turn player
-SJ13x>,J013,照準（黒・直達）,X,Direct,MAIN,Turn player
-SJ14x#,J014,照準（黒・機密）,X,Secret,MAIN,Turn player
-KT1r>,J015,解読（赤・直達）,R,Direct,PASS,Receiver
-KT2r#,J016,解読（赤・機密）,R,Secret,PASS,Receiver
-KT3r>,J017,解読（赤・直達）,R,Direct,PASS,Receiver
-KT4r#,J018,解読（赤・機密）,R,Secret,PASS,Receiver
-KT5r,J019,解読（赤・公開）,R,Public,PASS,Receiver
-KT6b,J020,解読（青・直達）,B,Public,PASS,Receiver
-KT7b>,J021,解読（青・機密）,B,Direct,PASS,Receiver
-KT8b#,J022,解読（青・直達）,B,Secret,PASS,Receiver
-KT9b>,J023,解読（青・機密）,B,Direct,PASS,Receiver
-KT10b#,J024,解読（青・公開）,B,Secret,PASS,Receiver
-KT11x,J025,解読（黒・公開）,X,Public,PASS,Receiver
-KT12x,J026,解読（黒・公開）,X,Public,PASS,Receiver
-KT13x>,J027,解読（黒・直達）,X,Direct,PASS,Receiver
-KT14x#,J028,解読（黒・機密）,X,Secret,PASS,Receiver
-TS1r>,J029,転送（赤・直達）,R,Direct,PASS,Receiver
-TS2r#,J030,転送（赤・機密）,R,Secret,PASS,Receiver
-TS3r,J031,転送（赤・公開）,R,Public,PASS,Receiver
-TS4b>,J032,転送（青・直達）,B,Direct,PASS,Receiver
-TS5b#,J033,転送（青・機密）,B,Secret,PASS,Receiver
-TS6b,J034,転送（青・公開）,B,Public,PASS,Receiver
-TS7x>,J035,転送（黒・直達）,X,Direct,PASS,Receiver
-TS8x#,J036,転送（黒・機密）,X,Secret,PASS,Receiver
-SR1r,J037,すり替え（赤・公開）,R,Public,PASS,Receiver
-SR2r,J038,すり替え（赤・公開）,R,Public,PASS,Receiver
-SR3b,J039,すり替え（青・公開）,B,Public,PASS,Receiver
-SR4b,J040,すり替え（青・公開）,B,Public,PASS,Receiver
-SR5x,J041,すり替え（黒・公開）,X,Public,PASS,Receiver
-SR6x,J042,すり替え（黒・公開）,X,Public,PASS,Receiver
-YK1r>,J043,横取り（赤・直達）,R,Direct,PASS,Non-Receiver
-YK2r#,J044,横取り（赤・機密）,R,Secret,PASS,Non-Receiver
-YK3r>,J045,横取り（赤・直達）,R,Direct,PASS,Non-Receiver
-YK4r#,J046,横取り（赤・機密）,R,Secret,PASS,Non-Receiver
-YK5r,J047,横取り（赤・公開）,R,Public,PASS,Non-Receiver
-YK6b>,J048,横取り（青・直達）,B,Direct,PASS,Non-Receiver
-YK7b#,J049,横取り（青・機密）,B,Secret,PASS,Non-Receiver
-YK8b>,J050,横取り（青・直達）,B,Direct,PASS,Non-Receiver
-YK9b#,J051,横取り（青・機密）,B,Secret,PASS,Non-Receiver
-YK10b,J052,横取り（青・公開）,B,Public,PASS,Non-Receiver
-YK11x>,J053,横取り（黒・直達）,X,Direct,PASS,Non-Receiver
-YK12x>,J054,横取り（黒・直達）,X,Direct,PASS,Non-Receiver
-YK13x#,J055,横取り（黒・機密）,X,Secret,PASS,Non-Receiver
-YK14x,J056,横取り（黒・公開）,X,Public,PASS,Non-Receiver
-OT1r>,J057,囮作戦（赤・直達）,R,Direct,PASS,Receiving
-OT2r#,J058,囮作戦（赤・機密）,R,Secret,PASS,Receiving
-OT3r>,J059,囮作戦（赤・直達）,R,Direct,PASS,Receiving
-OT4r#,J060,囮作戦（赤・機密）,R,Secret,PASS,Receiving
-OT5r,J061,囮作戦（赤・公開）,R,Public,PASS,Receiving
-OT6b>,J062,囮作戦（青・直達）,B,Direct,PASS,Receiving
-OT7b#,J063,囮作戦（青・機密）,B,Secret,PASS,Receiving
-OT8b>,J064,囮作戦（青・直達）,B,Direct,PASS,Receiving
-OT9b#,J065,囮作戦（青・機密）,B,Secret,PASS,Receiving
-OT10b,J066,囮作戦（青・公開）,B,Public,PASS,Receiving
-OT11x#,J067,囮作戦（黒・機密）,X,Secret,PASS,Receiving
-OT12x>,J068,囮作戦（黒・直達）,X,Direct,PASS,Receiving
-OT13x#,J069,囮作戦（黒・機密）,X,Secret,PASS,Receiving
-OT14x,J070,囮作戦（黒・公開）,X,Public,PASS,Receiving
-SK1r>,J071,焼却（赤・直達）,R,Direct,NONCHAIN,Receiving
-SK2r#,J072,焼却（赤・機密）,R,Secret,NONCHAIN,Receiving
-SK3b>,J073,焼却（青・直達）,B,Direct,NONCHAIN,Receiving
-SK4b#,J074,焼却（青・機密）,B,Secret,NONCHAIN,Receiving
-SK5x>,J075,焼却（黒・直達）,X,Direct,NONCHAIN,Receiving
-SK6x#,J076,焼却（黒・機密）,X,Secret,NONCHAIN,Receiving
-SK7x,J077,焼却7（黒・公開）,X,Public,NONCHAIN,Receiving
-KP1r>,J078,看破（赤・直達）,R,Direct,CHAIN,Chainable
-KP2r#,J079,看破（赤・機密）,R,Secret,CHAIN,Chainable
-KP3b>,J080,看破（青・直達）,B,Direct,CHAIN,Chainable
-KP4b#,J081,看破（青・機密）,B,Secret,CHAIN,Chainable
-KP5x>,J082,看破（黒・直達）,X,Direct,CHAIN,Chainable
-KP6x#,J083,看破（黒・機密）,X,Secret,CHAIN,Chainable
-KP7x#,J084,看破（黒・公開）,X,Public,CHAIN,Chainable
+CardID,PrintNo,CardName,Color,Method,Useable,User,Text
+SJ1r>,J001,照準（赤・直達）,R,Direct,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ2r#,J002,照準（赤・機密）,R,Secret,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ3r>,J003,照準（赤・直達）,R,Direct,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ4r#,J004,照準（赤・機密）,R,Secret,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ5r,J005,照準（赤・公開）,R,Public,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ6b,J006,照準（青・直達）,B,Public,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ7b>,J007,照準（青・機密）,B,Direct,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ8b#,J008,照準（青・直達）,B,Secret,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ9b>,J009,照準（青・機密）,B,Direct,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ10b#,J010,照準（青・公開）,B,Secret,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ11x,J011,照準（黒・公開）,X,Public,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ12x,J012,照準（黒・公開）,X,Public,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ13x>,J013,照準（黒・直達）,X,Direct,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+SJ14x#,J014,照準（黒・機密）,X,Secret,MAIN,Turn player,"ターンプレイヤーのメインのみ：\n一人指定して、照準状態になる：このターン、情報を拒否できない。"""
+KT1r>,J015,解読（赤・直達）,R,Direct,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT2r#,J016,解読（赤・機密）,R,Secret,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT3r>,J017,解読（赤・直達）,R,Direct,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT4r#,J018,解読（赤・機密）,R,Secret,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT5r,J019,解読（赤・公開）,R,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT6b,J020,解読（青・直達）,B,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT7b>,J021,解読（青・機密）,B,Direct,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT8b#,J022,解読（青・直達）,B,Secret,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT9b>,J023,解読（青・機密）,B,Direct,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT10b#,J024,解読（青・公開）,B,Secret,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT11x,J025,解読（黒・公開）,X,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT12x,J026,解読（黒・公開）,X,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT13x>,J027,解読（黒・直達）,X,Direct,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+KT14x#,J028,解読（黒・機密）,X,Secret,PASS,Receiver,情報受信中のみ：\n受信中の情報を自分だけこっそり見る。（公開情報にも使える。）
+TS1r>,J029,転送（赤・直達）,R,Direct,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+TS2r#,J030,転送（赤・機密）,R,Secret,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+TS3r,J031,転送（赤・公開）,R,Public,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+TS4b>,J032,転送（青・直達）,B,Direct,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+TS5b#,J033,転送（青・機密）,B,Secret,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+TS6b,J034,転送（青・公開）,B,Public,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+TS7x>,J035,転送（黒・直達）,X,Direct,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+TS8x#,J036,転送（黒・機密）,X,Secret,PASS,Receiver,情報受信中のみ：\nこのターン、受信方向を逆転する。（直達に使っても効果なし。）
+SR1r,J037,すり替え（赤・公開）,R,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を山札の下に戻す。このカードを表向きのままにすり替えます。（受信範囲・方向は変わらない。）
+SR2r,J038,すり替え（赤・公開）,R,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を山札の下に戻す。このカードを表向きのままにすり替えます。（受信範囲・方向は変わらない。）
+SR3b,J039,すり替え（青・公開）,B,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を山札の下に戻す。このカードを表向きのままにすり替えます。（受信範囲・方向は変わらない。）
+SR4b,J040,すり替え（青・公開）,B,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を山札の下に戻す。このカードを表向きのままにすり替えます。（受信範囲・方向は変わらない。）
+SR5x,J041,すり替え（黒・公開）,X,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を山札の下に戻す。このカードを表向きのままにすり替えます。（受信範囲・方向は変わらない。）
+SR6x,J042,すり替え（黒・公開）,X,Public,PASS,Receiver,情報受信中のみ：\n受信中の情報を山札の下に戻す。このカードを表向きのままにすり替えます。（受信範囲・方向は変わらない。）
+YK1r>,J043,横取り（赤・直達）,R,Direct,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK2r#,J044,横取り（赤・機密）,R,Secret,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK3r>,J045,横取り（赤・直達）,R,Direct,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK4r#,J046,横取り（赤・機密）,R,Secret,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK5r,J047,横取り（赤・公開）,R,Public,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK6b>,J048,横取り（青・直達）,B,Direct,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK7b#,J049,横取り（青・機密）,B,Secret,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK8b>,J050,横取り（青・直達）,B,Direct,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK9b#,J051,横取り（青・機密）,B,Secret,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK10b,J052,横取り（青・公開）,B,Public,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK11x>,J053,横取り（黒・直達）,X,Direct,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK12x>,J054,横取り（黒・直達）,X,Direct,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK13x#,J055,横取り（黒・機密）,X,Secret,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+YK14x,J056,横取り（黒・公開）,X,Public,PASS,Non-Receiver,情報発信中のみ：\n発信中の情報を自分の前に置く。（受信範囲は自分とターンプレイヤーだけになる。）
+OT1r>,J057,囮作戦（赤・直達）,R,Direct,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT2r#,J058,囮作戦（赤・機密）,R,Secret,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT3r>,J059,囮作戦（赤・直達）,R,Direct,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT4r#,J060,囮作戦（赤・機密）,R,Secret,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT5r,J061,囮作戦（赤・公開）,R,Public,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT6b>,J062,囮作戦（青・直達）,B,Direct,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT7b#,J063,囮作戦（青・機密）,B,Secret,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT8b>,J064,囮作戦（青・直達）,B,Direct,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT9b#,J065,囮作戦（青・機密）,B,Secret,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT10b,J066,囮作戦（青・公開）,B,Public,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT11x#,J067,囮作戦（黒・機密）,X,Secret,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT12x>,J068,囮作戦（黒・直達）,X,Direct,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT13x#,J069,囮作戦（黒・機密）,X,Secret,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+OT14x,J070,囮作戦（黒・公開）,X,Public,PASS,Receiving,情報発信中のみ：\n他のプレイヤー一人の対象を囮状態にする：このターン、情報の受け入れできない。\n照準状態のプレイヤーまたターンプレイヤーには発動できない。
+SK1r>,J071,焼却（赤・直達）,R,Direct,NONCHAIN,Receiving,情報受信後のみ：\n誰かが情報の受け入れ成功時に発動できる。対象となる誰かの黒情報一枚を山札の下に戻す。その対象が山札を切っても良い。（脱落する瞬間でも発動して回避できる。）
+SK2r#,J072,焼却（赤・機密）,R,Secret,NONCHAIN,Receiving,情報受信後のみ：\n誰かが情報の受け入れ成功時に発動できる。対象となる誰かの黒情報一枚を山札の下に戻す。その対象が山札を切っても良い。（脱落する瞬間でも発動して回避できる。）
+SK3b>,J073,焼却（青・直達）,B,Direct,NONCHAIN,Receiving,情報受信後のみ：\n誰かが情報の受け入れ成功時に発動できる。対象となる誰かの黒情報一枚を山札の下に戻す。その対象が山札を切っても良い。（脱落する瞬間でも発動して回避できる。）
+SK4b#,J074,焼却（青・機密）,B,Secret,NONCHAIN,Receiving,情報受信後のみ：\n誰かが情報の受け入れ成功時に発動できる。対象となる誰かの黒情報一枚を山札の下に戻す。その対象が山札を切っても良い。（脱落する瞬間でも発動して回避できる。）
+SK5x>,J075,焼却（黒・直達）,X,Direct,NONCHAIN,Receiving,情報受信後のみ：\n誰かが情報の受け入れ成功時に発動できる。対象となる誰かの黒情報一枚を山札の下に戻す。その対象が山札を切っても良い。（脱落する瞬間でも発動して回避できる。）
+SK6x#,J076,焼却（黒・機密）,X,Secret,NONCHAIN,Receiving,情報受信後のみ：\n誰かが情報の受け入れ成功時に発動できる。対象となる誰かの黒情報一枚を山札の下に戻す。その対象が山札を切っても良い。（脱落する瞬間でも発動して回避できる。）
+SK7x,J077,焼却（黒・公開）,X,Public,NONCHAIN,Receiving,情報受信後のみ：\n誰かが情報の受け入れ成功時に発動できる。対象となる誰かの黒情報一枚を山札の下に戻す。その対象が山札を切っても良い。（脱落する瞬間でも発動して回避できる。）
+KP1r>,J078,看破（赤・直達）,R,Direct,CHAIN,Chainable,手札からカードが発動される時のみ：\nそのカードを無効にする。そして、この連鎖にあるカードをすべて山札の下に戻す。山札を切っても良い。
+KP2r#,J079,看破（赤・機密）,R,Secret,CHAIN,Chainable,手札からカードが発動される時のみ：\nそのカードを無効にする。そして、この連鎖にあるカードをすべて山札の下に戻す。山札を切っても良い。
+KP3b>,J080,看破（青・直達）,B,Direct,CHAIN,Chainable,手札からカードが発動される時のみ：\nそのカードを無効にする。そして、この連鎖にあるカードをすべて山札の下に戻す。山札を切っても良い。
+KP4b#,J081,看破（青・機密）,B,Secret,CHAIN,Chainable,手札からカードが発動される時のみ：\nそのカードを無効にする。そして、この連鎖にあるカードをすべて山札の下に戻す。山札を切っても良い。
+KP5x>,J082,看破（黒・直達）,X,Direct,CHAIN,Chainable,手札からカードが発動される時のみ：\nそのカードを無効にする。そして、この連鎖にあるカードをすべて山札の下に戻す。山札を切っても良い。
+KP6x#,J083,看破（黒・機密）,X,Secret,CHAIN,Chainable,手札からカードが発動される時のみ：\nそのカードを無効にする。そして、この連鎖にあるカードをすべて山札の下に戻す。山札を切っても良い。
+KP7x#,J084,看破（黒・公開）,X,Public,CHAIN,Chainable,手札からカードが発動される時のみ：\nそのカードを無効にする。そして、この連鎖にあるカードをすべて山札の下に戻す。山札を切っても良い。

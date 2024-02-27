@@ -43,14 +43,14 @@ def teamwincheck(*args, **kwargs):
             msgzone = kwargs.get("playermsgall", None)
             playerroles = kwargs.get("playerroles", None)
             for key, value in playerroles.items():
-                if sum(1 for item in msgzone[key] if "x" in item) >= 1:
+                if sum(1 for item in msgzone[key] if "x" in item) >= 1:     # 3 Black cards -> retire
                     retires.append(key)
                 if value == "Red":
-                    if sum(1 for item in msgzone[key] if "r" in item) >= 1:
+                    if sum(1 for item in msgzone[key] if "r" in item) >= 1:     # 3 Red cards -> red win
                         print(f"There are 3 reds in {msgzone[key]}")
                         wins.append("Red")
                 if value == "Blue":
-                    if sum(1 for item in msgzone[key] if "b" in item) >= 1:
+                    if sum(1 for item in msgzone[key] if "b" in item) >= 1:     # 3 Blue cards -> blue win
                         print(f"There are 3 blues in {msgzone[key]}")
                         wins.append("Blue")
 

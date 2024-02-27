@@ -1,8 +1,10 @@
 import random
 from icecream import ic
 
+import Database
 
-def drawone(deck: dict, playerhand: list) -> list:
+
+def drawone(deck: dict, playerhand: list, playerid: int) -> list:
 
     if len(deck["MainDeck"]) == 0:      # When no cards to draw, recycle discard pile
         recycle(deck)
@@ -11,16 +13,18 @@ def drawone(deck: dict, playerhand: list) -> list:
         print("No more cards to draw.")     # When no cards even after recycle, no draw
         return playerhand
 
-    playerhand.append(deck["MainDeck"].pop(0))      # Remove card from deck
+    drawcard = deck["MainDeck"].pop(0)  # Remove card from deck
+    playerhand.append(drawcard)         # Add to hand
+    Database.drawcard(playerid, drawcard)
     print("Player drawed 1 card.")
 
     return playerhand
 
 
-def draw(deck: dict, playerhand: list, drawnum: int) -> list:
+def draw(deck: dict, playerhand: list, playerid: int, drawnum: int) -> list:
 
     for _ in range(drawnum):
-        playerhand = drawone(deck, playerhand)
+        playerhand = drawone(deck=deck, playerhand=playerhand, playerid=playerid)
 
     return playerhand
 
@@ -52,7 +56,7 @@ def discard(deck: dict, discards: list):
 def useeffectcard(hand: list, card: str, deck: dict):
 
     if card:
-        hand.remove(card)
+        hand.remove(card) if card in hand else None
         discard(deck, [card])
 
     return hand
