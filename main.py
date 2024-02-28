@@ -17,12 +17,10 @@ Database.startusertable()
 
 DeckFull = StartDistribution.deckstart()
 PlayerNum = 5
+Database.getPlayerNum(PlayerNum)
 PlayerRoles = StartDistribution.startrole(PlayerNum)
 PlayerChars = StartDistribution.chardraw(PlayerNum)
-PlayerHandAll = {}
-PlayerMsgAll = {}
-PlayerNames = {}
-PlayerBuffs = {}
+PlayerHandAll, PlayerMsgAll, PlayerNames, PlayerBuffs = {}, {}, {}, {}
 
 for playerid in range(PlayerNum):
     while True:
@@ -30,53 +28,28 @@ for playerid in range(PlayerNum):
         if UserName:
             PlayerNames[playerid] = UserName
             break
-    PlayerHandAll[playerid] = []
-
-    PlayerMsgAll[playerid] = []
-    PlayerBuffs[playerid] = []
+    PlayerHandAll[playerid], PlayerMsgAll[playerid], PlayerBuffs[playerid] = [], [], []
 
     Database.createuser(UserName, PlayerChars[playerid], PlayerRoles[playerid])
 
 for playerid in range(PlayerNum):
-    DrawCard.draw(deck=DeckFull, playerhand=PlayerHandAll[playerid], drawnum=4, playerid=playerid)
+    DrawCard.draw(deck=DeckFull, drawnum=4, playerid=playerid)
+
+PlayerTurn.getplayernames(PlayerNames)
 
 print(PlayerRoles)
 print(PlayerChars)
-ic(PlayerHandAll)
 
 
-# Read sqlite query results into a pandas DataFrame
 def PlayersDF():
     df = pd.read_sql_query("SELECT * from users", GameDatabase)
     return df
 
 
-def PlayerHandsDF():
-    # SQL query to fetch data
-    query = f"""
-        SELECT user_hand, code
-        FROM cards
-        WHERE user_hand IN ({','.join('?' for _ in range(PlayerNum))});
-    """
+PlayerTurn.getplayerroles(PlayersDF())
 
-    # Parameters for the SQL query (range(PlayerNum))
-    params = list(range(PlayerNum))
-
-    # Execute the query and fetch data into a DataFrame
-    df = pd.read_sql_query(query, GameDatabase, params=params)
-
-    # Group by user_hand and aggregate the codes into lists
-    grouped = df.groupby('user_hand')['code'].agg(list)
-
-    # Convert the grouped DataFrame to a dictionary
-    user_hands_dict = grouped.to_dict()
-
-    return user_hands_dict
-
-
-ic(PlayerHandsDF())   # Verify that result of SQL query is stored in the dataframe
-ic(PlayerHandAll == PlayerHandsDF())
-print(PlayersDF().head())   # Verify that result of SQL query is stored in the dataframe
+ic(Database.PlayerHandsDF())   # Verify that result of SQL query is stored in the dataframe
+ic(PlayersDF().head())   # Verify that result of SQL query is stored in the dataframe
 
 TurnPlayerID = random.choice(range(PlayerNum))  # Starting Player on Random
 
@@ -90,22 +63,32 @@ while not winners:
         input(f"It is now {TurnPlayerName}'s turn. OK?")
 
         """Draw Phase"""
-        PlayerTurn.startturn(DeckFull, TurnPlayerID, PlayerHandAll)
+        PlayerTurn.startturn(DeckFull,
+                             TurnPlayerID
+                             )
 
         """Main Phase"""
         survivor = PlayersDF()[PlayersDF()['Status'] == 'Alive'].index.tolist()
-        PlayerTurn.mainphase(turnplayerid=TurnPlayerID, playernames=PlayerNames,
-                             allhand=PlayerHandAll, allbuffs=PlayerBuffs, deck=DeckFull, survivor=survivor)
+        PlayerTurn.mainphase(turnplayerid=TurnPlayerID,
+                             allbuffs=PlayerBuffs,
+                             deck=DeckFull,
+                             survivor=survivor
+                             )
 
         """Message Phase"""
         survivor = PlayersDF()[PlayersDF()['Status'] == 'Alive'].index.tolist()
-        PlayerTurn.messagephase(turnplayerid=TurnPlayerID, playerno=PlayerNum,
-                                allhand=PlayerHandAll, allmsg=PlayerMsgAll,
-                                survivor=survivor, playernames=PlayerNames, allbuffs=PlayerBuffs)
+        PlayerTurn.messagephase(turnplayerid=TurnPlayerID,
+                                playerno=PlayerNum,
+                                allhand=Database.PlayerHandsDF(),
+                                survivor=survivor,
+                                allbuffs=PlayerBuffs
+                                )
 
         """End Phase"""
-        checkresults = PlayerTurn.endphase(turnplayerid=TurnPlayerID, deck=DeckFull, allhand=PlayerHandAll,
-                                           playermsgall=PlayerMsgAll, playerroles=PlayerRoles, allbuffs=PlayerBuffs)
+        checkresults = PlayerTurn.endphase(turnplayerid=TurnPlayerID,
+                                           deck=DeckFull,
+                                           allbuffs=PlayerBuffs
+                                           )
 
         teamwins = checkresults["teamwins"]
         retires = checkresults["retires"]
@@ -136,7 +119,6 @@ while not winners:
 
     """Go to next Player"""
     TurnPlayerID = (TurnPlayerID + 1) % PlayerNum
-    print(PlayerHandAll)
 
 for winner in winners:
     status = PlayersDF().iloc[winner]["Status"]

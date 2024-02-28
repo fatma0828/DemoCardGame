@@ -2,6 +2,15 @@ import sqlite3
 from sqlite3 import Error
 from datetime import datetime
 import pytz
+import pandas as pd
+from icecream import ic
+
+PlayerNum = 0
+
+
+def getPlayerNum(Num):
+    global PlayerNum
+    PlayerNum = Num
 
 
 def create_connection(starttime):
@@ -95,6 +104,26 @@ def drawcard(playerid, cardcode):
     execute_query(update_drawcard, playerid=playerid, cardcode=cardcode)
 
 
+def consumehand(cardcode):
+    update_usecard = """
+    UPDATE cards
+    SET user_hand = NULL
+    WHERE code = ?;
+    """
+
+    execute_query(update_usecard, cardcode=cardcode)
+
+
+def getmsgcard(playerid, cardcode):
+    update_msgcard = """
+    UPDATE cards
+    SET user_msg = ?
+    WHERE code = ?;
+    """
+
+    execute_query(update_msgcard, playerid=playerid, cardcode=cardcode)
+
+
 def retire(playerid):
     update_retire = """
     UPDATE users
@@ -103,3 +132,37 @@ def retire(playerid):
     """
 
     execute_query(update_retire, "Retire", playerid)
+
+
+def PlayerHandsDF() -> dict:
+    query = f"""
+        SELECT user_hand, code
+        FROM cards
+        WHERE user_hand IN ({','.join('?' for _ in range(PlayerNum))});
+    """
+
+    params = list(range(PlayerNum))    # Parameters for the SQL query (range(PlayerNum))
+    df = pd.read_sql_query(query, GameDatabase, params=params)    # Execute the query and fetch data into a DataFrame
+    grouped = df.groupby('user_hand')['code'].agg(list)    # Group by user_hand and aggregate the codes into lists
+    user_hands_dict = grouped.to_dict()    # Convert the grouped DataFrame to a dictionary
+
+    return user_hands_dict
+
+
+def PlayerMsgDF() -> dict:
+    query = f"""
+        SELECT user_msg, code
+        FROM cards
+        WHERE user_msg IN ({','.join('?' for _ in range(PlayerNum))});
+    """
+
+    params = list(range(PlayerNum))    # Parameters for the SQL query (range(PlayerNum))
+    df = pd.read_sql_query(query, GameDatabase, params=params)    # Execute the query and fetch data into a DataFrame
+    grouped = df.groupby('user_msg')['code'].agg(list)    # Group by user_hand and aggregate the codes into lists
+    user_msg_dict = grouped.to_dict()    # Convert the grouped DataFrame to a dictionary
+
+    for player_id in range(PlayerNum):
+        if player_id not in user_msg_dict:
+            user_msg_dict[player_id] = []
+
+    return user_msg_dict

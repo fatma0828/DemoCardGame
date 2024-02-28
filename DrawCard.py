@@ -4,29 +4,29 @@ from icecream import ic
 import Database
 
 
-def drawone(deck: dict, playerhand: list, playerid: int) -> list:
+def drawone(deck: dict, playerid: int):
 
     if len(deck["MainDeck"]) == 0:      # When no cards to draw, recycle discard pile
         recycle(deck)
 
     if len(deck["MainDeck"]) == 0:
         print("No more cards to draw.")     # When no cards even after recycle, no draw
-        return playerhand
+        return
 
     drawcard = deck["MainDeck"].pop(0)  # Remove card from deck
-    playerhand.append(drawcard)         # Add to hand
+    #   playerhand.append(drawcard)
     Database.drawcard(playerid, drawcard)
     print("Player drawed 1 card.")
 
-    return playerhand
+    return
 
 
-def draw(deck: dict, playerhand: list, playerid: int, drawnum: int) -> list:
+def draw(deck: dict, playerid: int, drawnum: int):
 
     for _ in range(drawnum):
-        playerhand = drawone(deck=deck, playerhand=playerhand, playerid=playerid)
+        drawone(deck=deck, playerid=playerid)
 
-    return playerhand
+    return
 
 
 def recycle(deck: dict) -> dict:
@@ -53,10 +53,20 @@ def discard(deck: dict, discards: list):
     return deck, discards
 
 
-def useeffectcard(hand: list, card: str, deck: dict):
+def useeffectcard(card: str, deck: dict):
 
     if card:
-        hand.remove(card) if card in hand else None
+        Database.consumehand(card)
         discard(deck, [card])
 
-    return hand
+    return
+
+
+def returndeckhand(card: str, deck: dict):
+
+    if card:
+        Database.consumehand(card)
+        deck["MainDeck"].append(card)
+        ic(deck["MainDeck"][:5])
+
+    return
