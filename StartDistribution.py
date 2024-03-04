@@ -35,7 +35,7 @@ def chardraw(playernum: int) -> dict:
             fullsetchar.remove(x)       # Remove picked characters from set
 
         while True:
-            charchoice = input("Please select character '1', '2', or '3':\n" + "- ".join(pickset))
+            charchoice = input("Please select character '1', '2', or '3':\n" + " - ".join(pickset) + "\n")
             if charchoice in ["1", "2", "3"]:
                 break
         playerchar[i] = pickset[int(charchoice) - 1]
@@ -53,4 +53,3 @@ def deckstart() -> dict:
         Database.createdeck(cardtable.deckcsv["CardID"][cardid], cardtable.deckcsv["CardName"][cardid])
 
     return fulldeck
-

@@ -19,6 +19,13 @@ def getplayerroles(df):
     playerroles = df['role'].to_dict()
 
 
+def showmsglocation(msgcard: str, msgholderid: int):
+    if ">" in msgcard or "#" in msgcard:  # 直達の場合
+        print(f"A message is now in front of Player {playernames[msgholderid]}.")
+    else:
+        print(f"A message: {msgcard} is now in front of Player {playernames[msgholderid]}.")
+
+
 def startturn(deck: dict, turnplayerid: int):
 
     DrawCard.draw(deck=deck, drawnum=2, playerid=turnplayerid)
@@ -26,41 +33,171 @@ def startturn(deck: dict, turnplayerid: int):
     return
 
 
-def usecardKP(deck: dict):
+def usecardKP(deck: dict, turnplayerid: int):
     allhand = Database.PlayerHandsDF()
-    for player_id, hand in allhand.items():
+
+    start_player_id = turnplayerid
+    player_ids = list(allhand.keys())
+    player_ids_reordered = player_ids[start_player_id:] + player_ids[:start_player_id]
+
+    for player_id in player_ids_reordered:
+        hand = allhand[player_id]
+
         if any(item.startswith("KP") for item in hand):
             while True:
                 usecard = input(f"Does {playernames[player_id]} want to use COUNTER? Input to use, or type 'skip'."
-                                f"\n Hand: {hand[player_id]}")
+                                f"\n Hand: {hand}")
                 if usecard in hand and usecard.startswith("KP"):
                     DrawCard.useeffectcard(usecard, deck)
                     return False
                 if usecard == "skip":
                     break
-
     return True
 
 
 def usecardSJ(turnplayerid: int, usecard: str, survivor: list, deck: dict, allbuffs: dict):
-    if usecard.startswith("SJ"):    # 照準の処理
+    otherplayers = survivor
+    otherplayers.remove(turnplayerid) if turnplayerid in otherplayers else None     # Cannot use on turn player
+    while True:
+        try:
+            sj_target = input(f"Please select target player ID: {otherplayers} or stop by 'skip'.")
+            if int(sj_target) in otherplayers:
+                sj_target = int(sj_target)
+                print(f"{playernames[turnplayerid]} is using SJ against {playernames[sj_target]}.")
+                """ COUNTER-CARD """
+                cardsuccess = usecardKP(deck, turnplayerid)
+                if cardsuccess:
+                    allbuffs[sj_target].append("SJ")
+                    DrawCard.useeffectcard(usecard, deck)
+                if not cardsuccess:
+                    DrawCard.returndeckhand(usecard, deck)
+                break
+            if sj_target == "skip":
+                break
+        except ValueError as e:
+            print(f"Invalid target. {e}")
+    return
+
+
+def usecardTS(turnplayerid: int, msgholderid: int, usecard: str, survivor: list, deck: dict):
+    otherplayers = survivor
+    otherplayers.remove(msgholderid) if msgholderid in otherplayers else None     # Cannot use on self
+    while True:
+        try:
+            ts_target = input(f"Please select target player ID: {otherplayers} or stop by 'skip'.")
+            if int(ts_target) in otherplayers:
+                ts_target = int(ts_target)
+                print(f"{playernames[turnplayerid]} is using 偵察 against {playernames[ts_target]}.")
+                """ COUNTER-CARD """
+                cardsuccess = usecardKP(deck, turnplayerid)
+                if cardsuccess:
+                    if "r" in usecard and playerroles[ts_target] != "Red":
+                        DrawCard.drawone(deck, ts_target)
+                    if "b" in usecard and playerroles[ts_target] != "Blue":
+                        DrawCard.drawone(deck, ts_target)
+                    if "x" in usecard and playerroles[ts_target] != "Green":
+                        DrawCard.drawone(deck, ts_target)
+                    DrawCard.useeffectcard(usecard, deck)
+                if not cardsuccess:
+                    DrawCard.returndeckhand(usecard, deck)
+                break
+            if ts_target == "skip":
+                break
+        except ValueError as e:
+            print(f"Invalid target. {e}")
+    return
+
+
+def usecardYK(turnplayerid: int, userid: int, usecard: str, deck: dict, allbuffs: dict):
+    """ COUNTER-CARD """
+    cardsuccess = usecardKP(deck, turnplayerid)
+    if cardsuccess:
+        allbuffs[turnplayerid].append("YK")     # 横取りの処理
+        allbuffs[userid].append("YK")     # 横取りの処理
+        DrawCard.useeffectcard(usecard, deck)
+        return True
+    if not cardsuccess:
+        DrawCard.returndeckhand(usecard, deck)
+        return False
+
+
+def usecardOT(turnplayerid: int, msgholderid: int, usecard: str, survivor: list, deck: dict, allbuffs: dict):
+    otherplayers = survivor
+    otherplayers.remove(turnplayerid) if turnplayerid in otherplayers else None     # Cannot use on turn player
+    otherplayers.remove(msgholderid) if msgholderid in otherplayers else None     # Cannot use on self
+    while True:
+        try:
+            ot_target = input(f"Please select target player ID: {otherplayers} or stop by 'skip'.")
+            if int(ot_target) in otherplayers:
+                ot_target = int(ot_target)
+                print(f"{playernames[turnplayerid]} is using OT against {playernames[ot_target]}.")
+                if "SJ" in allbuffs[ot_target]:
+                    print(f"{playernames[ot_target]} は照準されていますので、発動できません。")
+                    break
+                """ COUNTER-CARD """
+                cardsuccess = usecardKP(deck, turnplayerid)
+                if cardsuccess:
+                    allbuffs[ot_target].append("OT")    # 囮作戦の処理
+                    DrawCard.useeffectcard(usecard, deck)
+                if not cardsuccess:
+                    DrawCard.returndeckhand(usecard, deck)
+                break
+            if ot_target == "skip":
+                break
+        except ValueError as e:
+            print(f"Invalid target. {e}")
+    return
+
+
+def usecardSR(turnplayerid: int, usecard: str, deck: dict):
+    """ COUNTER-CARD """
+    cardsuccess = usecardKP(deck, turnplayerid)
+    if cardsuccess:
+        DrawCard.useeffectcard(usecard, deck)
+        return True
+    if not cardsuccess:
+        DrawCard.returndeckhand(usecard, deck)
+        return False
+
+
+def usecardKT(turnplayerid: int, usecard: str, deck: dict):
+    """ COUNTER-CARD """
+    cardsuccess = usecardKP(deck, turnplayerid)
+    if cardsuccess:
+        DrawCard.useeffectcard(usecard, deck)
+        return True
+    if not cardsuccess:
+        DrawCard.returndeckhand(usecard, deck)
+        return False
+
+
+def usecardSK(turnplayerid: int, usecard: str, survivor: list, deck: dict):
+    if usecard.startswith("SK"):    # 焼却の処理
         otherplayers = survivor
-        otherplayers.remove(turnplayerid) if turnplayerid in otherplayers else None
         while True:
             try:
-                sjtarget = input(f"Please select target player ID: {otherplayers} or stop by 'skip'.")
-                if int(sjtarget) in otherplayers:
-                    sjtarget = int(sjtarget)
-                    print(f"{playernames[turnplayerid]} is using SJ against {playernames[sjtarget]}.")
+                sk_target = input(f"Please select target player ID: {otherplayers} or stop by 'skip'.")
+                if int(sk_target) in otherplayers:
+                    sk_target = int(sk_target)
+                    print(f"{playernames[turnplayerid]} is using OT against {playernames[sk_target]}.")
                     """ COUNTER-CARD """
-                    cardsuccess = usecardKP(deck)
+                    cardsuccess = usecardKP(deck, turnplayerid)
+
                     if cardsuccess:
-                        allbuffs[sjtarget].append("SJ")
+                        while True:
+                            burncard = input(f"Select 1 black card from: {Database.PlayerMsgDF()[sk_target]}")
+                            if "x" not in burncard:
+                                print("Please select black card only.")
+                                continue
+                            if burncard in Database.PlayerMsgDF()[sk_target]:
+                                DrawCard.returndeckmsg(burncard, deck)
+
                         DrawCard.useeffectcard(usecard, deck)
+
                     if not cardsuccess:
                         DrawCard.returndeckhand(usecard, deck)
                     break
-                if sjtarget == "skip":
+                if sk_target == "skip":
                     break
             except ValueError as e:
                 print(f"Invalid target. {e}")
@@ -68,84 +205,126 @@ def usecardSJ(turnplayerid: int, usecard: str, survivor: list, deck: dict, allbu
 
 
 def mainphase(turnplayerid: int, allbuffs: dict, deck: dict, survivor: list):
-    print(f"Turn player {playernames[turnplayerid]}, You may use cards. Type 'skip' to skip.")
     while True:
+        print(f"Turn player {playernames[turnplayerid]}, You may use cards. Type 'skip' to skip.")
         usecard = input(f"Hand: {Database.PlayerHandsDF()[turnplayerid]}, or 'skip'.")
         if usecard in Database.PlayerHandsDF()[turnplayerid]:
-            usetime = cardtable.deckcsv.loc[cardtable.deckcsv['CardID'] == usecard, 'Useable'].iloc[0]
-            if "MAIN" in usetime:
+            if usecard.startswith("SJ"):    # 照準の処理
                 print(f"Attempting to use {usecard}.")
-                if usecard.startswith("SJ"):    # 照準の処理
-                    usecardSJ(turnplayerid, usecard, survivor, deck, allbuffs)
+                usecardSJ(turnplayerid, usecard, survivor, deck, allbuffs)
         if usecard == "skip":
             break
 
 
-def messagephase(turnplayerid: int, playerno: int, allhand: dict,
+def messagephase(turnplayerid: int, playerno: int, allhand: dict, deck: dict,
                  survivor: list, allbuffs: dict):
-    print(f"Turn player {turnplayerid}, please send 1 hand card as message.")
+    print(f"Turn player {playernames[turnplayerid]}, please send 1 hand card as message.")
     while True:
         sendmsg = input(f"Hand: {allhand[turnplayerid]}")
         if sendmsg in allhand[turnplayerid]:
             break
     if ">" in sendmsg:
         otherplayers = [player for player in survivor if player != turnplayerid]
-        ic(otherplayers)
-        ic(survivor)
         while True:
             try:
                 msgtarget = int(input(f"Please select target player ID: {otherplayers}"))
                 if msgtarget in otherplayers:
+                    receivers = [msgtarget, turnplayerid]
                     break
             except ValueError:
                 print("Invalid target.")
     else:
-        msgtarget = (turnplayerid - 1) % playerno
+        receivers = list(range(turnplayerid - 1, -1, -1)) + list(range(playerno - 1, turnplayerid - 1, -1))
+        receivers = [player_id for player_id in receivers if player_id in survivor]
 
+    ic(receivers)
     Database.consumehand(sendmsg)
-    ic(survivor)
-    rotatingmsg(turnplayerid=turnplayerid, playerno=playerno,
-                msgholderid=msgtarget, msgcard=sendmsg,
-                survivor=survivor, allbuffs=allbuffs)
+    rotatingmsg(turnplayerid=turnplayerid, deck=deck, msgcard=sendmsg,
+                survivor=survivor, allbuffs=allbuffs, receivers=receivers)
 
 
 # messagephase(0, 5, {0: ["A", "B"], 1: ["A"]}, {0: [], 1: []})
 
-def rotatingmsg(turnplayerid: int, playerno: int, msgholderid: int, msgcard: str,
-                survivor: list, allbuffs: dict):
+def rotatingmsg(turnplayerid: int, deck: dict, msgcard: str,
+                survivor: list, allbuffs: dict, receivers: list):
+    msgorder = 0
 
     while True:
-        ic(survivor)
-        while msgholderid not in survivor:
-            print(f"skipping {msgholderid}")
-            msgholderid = (msgholderid - 1) % playerno
-        if ">" in msgcard or "#" in msgcard:
-            print(f"A message is now in front of Player {playernames[msgholderid]}.")
-        else:
-            print(f"A message: {msgcard} is now in front of Player {playernames[msgholderid]}.")
-        msgaccept = input(f"Will {msgholderid} accept the message? Y/N")
+        msgholderid = receivers[msgorder]
+
+        while msgholderid not in survivor:          # 生存確認
+            print(f"Skipping retired {playernames[msgholderid]}.")
+            msgorder = (msgorder + 1) % len(receivers)
+            ic(allbuffs)
+
+        msgholderid = receivers[msgorder]
+        ic(receivers)
+        showmsglocation(msgcard, msgholderid)
+
+        """CARD TIME: YK, OT, SR (msgholder), KT (msgholder)"""
+        player_ids_reordered = survivor[turnplayerid:] + survivor[:turnplayerid]
+        for player_id in player_ids_reordered:
+            while True:
+                allhand = Database.PlayerHandsDF()
+                usecard = input(f"Does {playernames[player_id]} want to use cards? Input to use, or type 'skip'."
+                                f"\n Hand: {allhand[player_id]}")
+                if usecard.startswith("YK"):
+                    yk_sucess = usecardYK(turnplayerid, player_id, usecard, deck, allbuffs)
+                    if yk_sucess:
+                        receivers = [player_id, turnplayerid]     # 横取りの処理
+                        msgorder = 0
+                        msgholderid = receivers[msgorder]
+
+                    showmsglocation(msgcard, msgholderid)
+
+                if usecard.startswith("OT"):
+                    usecardOT(turnplayerid, msgholderid, usecard, survivor, deck, allbuffs)
+                if usecard == "skip":
+                    break
+
+                if usecard.startswith("SR"):
+                    sr_success = usecardSR(turnplayerid, usecard, deck)
+                    if sr_success:
+                        deck["MainDeck"].append(msgcard)
+                        ic(deck["MainDeck"][:5])
+                        msgcard = usecard                           # すり替えの処理
+
+                if usecard.startswith("KT"):
+                    kt_success = usecardSR(turnplayerid, usecard, deck)
+                    if kt_success:
+                        print(f"The message is {usecard}.")
+
+        while True:
+            msgaccept = input(f"Will {playernames[msgholderid]} accept the message? Y/N")
+            if msgaccept == "Y" or msgaccept == "N":
+                break
+
         if msgaccept == "Y":
-            Database.getmsgcard(msgholderid, msgcard)
-            print(f"Player {playernames[msgholderid]}'s message zone: {Database.PlayerMsgDF()[msgholderid]}.")
-            break
+            if "OT" in allbuffs[msgholderid]:
+                msgaccept = "N"
+            else:
+                Database.getmsgcard(msgholderid, msgcard)
+                print(f"Player {playernames[msgholderid]}'s message zone: {Database.PlayerMsgDF()[msgholderid]}.")
+                usecardSK(turnplayerid, usecard, survivor, deck)
+                break
 
         if msgaccept == "N":
             if msgholderid == turnplayerid or "SJ" in allbuffs[msgholderid]:
                 print("You are not allowed to reject.")
                 Database.getmsgcard(msgholderid, msgcard)
                 print(f"Player {playernames[msgholderid]}'s message zone: {Database.PlayerMsgDF()[msgholderid]}.")
+                usecardSK(turnplayerid, usecard, survivor, deck)
                 break
 
-            if ">" in msgcard:
-                msgholderid = turnplayerid
-
             else:
-                msgholderid = (msgholderid - 1) % playerno
+                msgorder = (msgorder + 1) % len(receivers)
+                msgholderid = receivers[msgorder]
+                ic(receivers)
 
-            print(f"Message rejected. Sent to Player {playernames[msgholderid]}.")
+                print(f"Message rejected. Sent to Player {playernames[msgholderid]}.")
 
 
-def endphase(turnplayerid: int, deck: dict, allbuffs: dict) -> dict:
+def endphase(turnplayerid: int, deck: dict) -> dict:
 
     teamwins, retires = GameConditions.teamwincheck(playerroles, Database.PlayerMsgDF())
     checkresults = {"teamwins": teamwins, "retires": retires}

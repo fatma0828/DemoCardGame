@@ -124,6 +124,16 @@ def getmsgcard(playerid, cardcode):
     execute_query(update_msgcard, playerid=playerid, cardcode=cardcode)
 
 
+def burnmsg(cardcode):
+    update_msgcard = """
+    UPDATE cards
+    SET user_msg = NULL
+    WHERE code = ?;
+    """
+
+    execute_query(update_msgcard, cardcode=cardcode)
+
+
 def retire(playerid):
     update_retire = """
     UPDATE users
@@ -145,6 +155,9 @@ def PlayerHandsDF() -> dict:
     df = pd.read_sql_query(query, GameDatabase, params=params)    # Execute the query and fetch data into a DataFrame
     grouped = df.groupby('user_hand')['code'].agg(list)    # Group by user_hand and aggregate the codes into lists
     user_hands_dict = grouped.to_dict()    # Convert the grouped DataFrame to a dictionary
+
+    # Sort the dictionary keys to enforce order
+    user_hands_dict = {key: user_hands_dict[key] for key in sorted(user_hands_dict.keys())}
 
     return user_hands_dict
 

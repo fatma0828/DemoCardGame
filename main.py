@@ -5,7 +5,14 @@ import PlayerTurn
 import pandas as pd
 import random
 from icecream import ic
+import pygame
+from pygame.locals import QUIT
 
+
+pygame.init()
+SURFACE = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("Just Window")
+clock = pygame.time.Clock()
 
 """Database"""
 
@@ -79,6 +86,7 @@ while not winners:
         survivor = PlayersDF()[PlayersDF()['Status'] == 'Alive'].index.tolist()
         PlayerTurn.messagephase(turnplayerid=TurnPlayerID,
                                 playerno=PlayerNum,
+                                deck=DeckFull,
                                 allhand=Database.PlayerHandsDF(),
                                 survivor=survivor,
                                 allbuffs=PlayerBuffs
@@ -87,11 +95,13 @@ while not winners:
         """End Phase"""
         checkresults = PlayerTurn.endphase(turnplayerid=TurnPlayerID,
                                            deck=DeckFull,
-                                           allbuffs=PlayerBuffs
                                            )
 
         teamwins = checkresults["teamwins"]
         retires = checkresults["retires"]
+
+        surviveDF = PlayersDF()[PlayersDF()['Status'] == 'Alive']
+        surviveTeam = surviveDF['role'].unique()
 
         if retires:
             for player in retires:
@@ -101,15 +111,16 @@ while not winners:
                 DrawCard.discard(DeckFull, PlayerHandAll[player])
                 DrawCard.discard(DeckFull, PlayerMsgAll[player])
 
-            surviveDF = PlayersDF()[PlayersDF()['Status'] == 'Alive']
             if len(surviveDF) == 1:
                 winners = [surviveDF['name']]
-            surviveTeam = surviveDF['role'].unique()
             ic(surviveTeam)
             print(f"There are {len(surviveTeam)} teams alive!")
             if len(surviveTeam) == 1:
                 if "Green" not in surviveTeam:
                     teamwins = surviveTeam
+
+        for player_id in surviveDF.index:
+            PlayerBuffs[player_id] = []
 
         if teamwins:
             winners = [row_index for row_index, (key, value) in enumerate(PlayerRoles.items()) if value in teamwins]
@@ -119,6 +130,10 @@ while not winners:
 
     """Go to next Player"""
     TurnPlayerID = (TurnPlayerID + 1) % PlayerNum
+
+    """PYGAME"""
+    pygame.display.update()
+    clock.tick(1)
 
 for winner in winners:
     status = PlayersDF().iloc[winner]["Status"]

@@ -67,6 +67,17 @@ def returndeckhand(card: str, deck: dict):
     if card:
         Database.consumehand(card)
         deck["MainDeck"].append(card)
+        ic(deck["MainDeck"][5:])
+
+    return
+
+
+def returndeckmsg(card: str, deck: dict):
+
+    if card:
+        Database.burnmsg(card)
+        deck["MainDeck"].append(card)
         ic(deck["MainDeck"][:5])
 
     return
+
