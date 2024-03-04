@@ -79,9 +79,9 @@ def usecardSJ(turnplayerid: int, usecard: str, survivor: list, deck: dict, allbu
     return
 
 
-def usecardTS(turnplayerid: int, msgholderid: int, usecard: str, survivor: list, deck: dict):
+def usecardTS(turnplayerid: int, usecard: str, survivor: list, deck: dict):
     otherplayers = survivor
-    otherplayers.remove(msgholderid) if msgholderid in otherplayers else None     # Cannot use on self
+    otherplayers.remove(turnplayerid) if turnplayerid in otherplayers else None     # Cannot use on self
     while True:
         try:
             ts_target = input(f"Please select target player ID: {otherplayers} or stop by 'skip'.")
@@ -212,6 +212,9 @@ def mainphase(turnplayerid: int, allbuffs: dict, deck: dict, survivor: list):
             if usecard.startswith("SJ"):    # 照準の処理
                 print(f"Attempting to use {usecard}.")
                 usecardSJ(turnplayerid, usecard, survivor, deck, allbuffs)
+            if usecard.startswith("TS"):    # 偵察の処理
+                print(f"Attempting to use {usecard}.")
+                usecardTS(turnplayerid, usecard, survivor, deck)
         if usecard == "skip":
             break
 
@@ -279,10 +282,11 @@ def rotatingmsg(turnplayerid: int, deck: dict, msgcard: str,
 
                 if usecard.startswith("OT"):
                     usecardOT(turnplayerid, msgholderid, usecard, survivor, deck, allbuffs)
-                if usecard == "skip":
-                    break
 
                 if usecard.startswith("SR"):
+                    if player_id != msgholderid:
+                        print("You are not message holder.")
+                        break
                     sr_success = usecardSR(turnplayerid, usecard, deck)
                     if sr_success:
                         deck["MainDeck"].append(msgcard)
@@ -290,9 +294,15 @@ def rotatingmsg(turnplayerid: int, deck: dict, msgcard: str,
                         msgcard = usecard                           # すり替えの処理
 
                 if usecard.startswith("KT"):
+                    if player_id != msgholderid:
+                        print("You are not message holder.")
+                        break
                     kt_success = usecardSR(turnplayerid, usecard, deck)
                     if kt_success:
                         print(f"The message is {usecard}.")
+
+                if usecard == "skip":
+                    break
 
         while True:
             msgaccept = input(f"Will {playernames[msgholderid]} accept the message? Y/N")
